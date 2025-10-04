@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 800,
+  "height": 600,
+  "data": {
+    "url": "../data/DTW_UR_SA2.geojson",
+    "format": {
+      "type": "topojson",
+      "feature": "collection"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.Geography_Label",
+      "from": {
+        "data": {
+          "url": "../data/Sa2-method-to-work.csv"
+        },
+        "key": "Suburb",
+        "fields": [
+          "Vehicle",
+          "Total",
+          "Not applicable",
+          "Public Transport",
+          "Active Transport",
+          "Private ratio"
+        ]
+      }
+    },
+    {
+      "calculate": "datum['Private ratio'] * 100",
+      "as": "vehicle_percentage"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": "geoshape",
+  "encoding": {
+    "color": {
+      "field": "vehicle_percentage",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#f7fcf0",
+          "#e0f3db",
+          "#ccebc5",
+          "#a8ddb5",
+          "#7bccc4",
+          "#4eb3d3",
+          "#2b8cbe",
+          "#0868ac",
+          "#084081"
+        ]
+      }
+    },
+    "stroke": {
+      "value": "white"
+    },
+    "strokeWidth": {
+      "value": 0.5
+    },
+    "tooltip": [
+      { "field": "properties.SA2_NAME16", "title": "Area" },
+      {
+        "field": "vehicle_percentage",
+        "title": "Vehicle Usage (%)",
+        "format": ".1f"
+      },
+      { "field": "Vehicle", "title": "Vehicle Users", "format": "," },
+      {
+        "field": "Public Transport",
+        "title": "Public Transport Users",
+        "format": ","
+      },
+      {
+        "field": "Active Transport",
+        "title": "Active Transport Users",
+        "format": ","
+      }
+    ]
+  }
+}
