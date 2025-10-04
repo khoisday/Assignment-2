@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "National Motorised Passenger Travel by Mode (2023-24)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/different-transport.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum['Financial year'] == '2023-24'"},
+    {
+      "fold": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
+      "as": ["mode", "value"]
+    },
+    {"filter": "datum.value != null"},
+    {"joinaggregate": [{"op": "sum", "field": "value", "as": "total"}]},
+    {"calculate": "datum.value / datum.total", "as": "percentage"}
+  ],
+  "mark": {"type": "arc"},
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": "normalize"},
+    "color": {
+      "field": "mode",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
+        "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+      }
+    },
+    "tooltip": [
+      {"field": "mode", "type": "nominal", "title": "Transport Mode"},
+      {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Distance Traveled (Billion km)",
+        "format": ".1f"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Percentage",
+        "format": ".1%"
+      }
+    ]
+  },
+  "config": {}
+}
