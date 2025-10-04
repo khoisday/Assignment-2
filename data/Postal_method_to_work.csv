@@ -1,4 +1,4 @@
-MTW06P Method of Travel to Work (6 travel modes),Public Transport,Vehicle,Active Transport,Other Mode,Worked at home or Did not go to work,Not applicable,Mode not stated,Total
+postcode,Public Transport,Vehicle,Active Transport,Other Mode,Worked at home or Did not go to work,Not applicable,Mode not stated,Total
 2000,5224,1694,6415,129,1455,11037,205,26166
 2006,131,111,114,5,195,664,23,1243
 2007,1238,560,1373,27,448,4772,47,8466
@@ -2668,6 +2668,3 @@ MTW06P Method of Travel to Work (6 travel modes),Public Transport,Vehicle,Active
 4385,6,305,34,15,110,551,6,1023
 4825,123,7392,645,57,934,5343,114,14594
 Total,1248935,7263670,476703,72805,1505342,8322987,103768,18994209
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
