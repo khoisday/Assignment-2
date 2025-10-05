@@ -1,23 +1,28 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "title": "National Motorised Passenger Travel by Mode Over Time",
+  "width": 850,
+  "height": 230,
   "data": {
     "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/different-transport.csv",
-    "format": {"type": "csv"}
+    "format": { "type": "csv" }
   },
   "transform": [
     {
       "fold": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
       "as": ["mode", "value"]
     },
-    {"filter": "datum.value != null"}
+    { "filter": "datum.value != null" }
   ],
-  "mark": {"type": "line", "point": true},
+  "mark": { "type": "line", "point": true },
   "encoding": {
     "x": {
       "field": "Financial year",
       "type": "ordinal",
-      "title": "Financial Year"
+      "title": "Financial Year",
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "split(datum.label, '-')[0] % 5 == 0 || datum.label == '2023-24' ? datum.label : ''"
+      }
     },
     "y": {
       "field": "value",
@@ -34,7 +39,7 @@
       }
     },
     "tooltip": [
-      {"field": "Financial year", "type": "ordinal", "title": "Year"},
+      { "field": "Financial year", "type": "ordinal", "title": "Year" },
       {
         "field": "value",
         "type": "quantitative",

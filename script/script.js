@@ -20,7 +20,71 @@ document.addEventListener("DOMContentLoaded", function () {
       // updateDashboard(selectedRegion);
     });
   });
+
+  // Load visualizations
+  loadVisualizations();
 });
+
+// Function to load all visualizations
+function loadVisualizations() {
+  // Load pie chart (trans_pie.vl.json)
+  loadVisualization(
+    "visualization/trans_pie.vl.json",
+    "#pie-chart",
+    "vega-lite"
+  );
+
+  // Load line chart (line_chart.vl.json)
+  loadVisualization(
+    "visualization/line_chart.vl.json",
+    "#line-chart",
+    "vega-lite"
+  );
+
+  // Load map visualization (visualization.vg.json)
+  loadVisualization("visualization/map.vg.json", "#map-chart", "vega");
+}
+
+// Generic function to load a visualization
+function loadVisualization(jsonFile, containerId, type) {
+  // Fetch the JSON file
+  fetch(jsonFile)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load ${jsonFile}: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((spec) => {
+      // Embed the visualization
+      const embedOptions = {
+        mode: type, // "vega" or "vega-lite"
+        actions: {
+          export: true,
+          source: false,
+          compiled: false,
+          editor: false,
+        },
+      };
+
+      vegaEmbed(containerId, spec, embedOptions)
+        .then((result) => {
+          console.log(`${jsonFile} loaded successfully`);
+        })
+        .catch((error) => {
+          console.error(`Error embedding ${jsonFile}:`, error);
+          document.querySelector(
+            containerId
+          ).innerHTML = `<p style="color: red;">Error loading visualization: ${error.message}</p>`;
+        });
+    })
+    .catch((error) => {
+      console.error(`Error fetching ${jsonFile}:`, error);
+      document.querySelector(
+        containerId
+      ).innerHTML = `<p style="color: red;">Error loading ${jsonFile}: ${error.message}</p>`;
+    });
+}
 
 // Utility function for drawing donut charts (for future use)
 function drawDonutChart(canvasId, data, colors) {
@@ -74,4 +138,5 @@ const chartColors = {
 window.dashboardUtils = {
   drawDonutChart,
   chartColors,
+  loadVisualization,
 };

@@ -110,7 +110,7 @@ body {
   margin-top: 8px;
 }
 
-/* Chart container styles for future use */
+/* Chart container styles */
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -120,7 +120,7 @@ body {
 
 .charts-grid-2col {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-bottom: 15px;
 }
@@ -130,13 +130,67 @@ body {
   border: 1px solid #e8ecf1;
   border-radius: 12px;
   padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .chart-title {
   color: #0f4c5c;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8ecf1;
+}
+
+/* Vega visualization containers */
+#pie-chart,
+#line-chart,
+#map-chart {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#map-chart {
+  min-height: 600px;
+}
+
+/* Vega embed actions styling */
+.vega-embed .vega-actions {
+  background: white;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.vega-embed .vega-actions a {
+  color: #0f4c5c;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.vega-embed .vega-actions a:hover {
+  background: #e8ecf1;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .charts-grid-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .charts-grid-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-row {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
 .bar-chart {

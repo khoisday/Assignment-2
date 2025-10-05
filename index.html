@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Australian Travel & Transport Dashboard</title>
-    <link rel="stylesheet" href="styles\styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <!-- Vega and Vega-Lite libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   </head>
   <body>
     <div class="dashboard">
@@ -56,9 +61,25 @@
         </div>
       </div>
 
-      <!-- Additional charts will be added here -->
+      <!-- Visualization Charts -->
+      <div class="charts-grid-2col">
+        <div class="chart-container">
+          <div class="chart-title">Transport Mode Distribution</div>
+          <div id="pie-chart"></div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-title">Transport Trends Over Time</div>
+          <div id="line-chart"></div>
+        </div>
+      </div>
+
+      <div class="chart-container" style="margin-bottom: 20px">
+        <div class="chart-title">Private Transport Usage by Postcode</div>
+        <div id="map-chart"></div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script/script.js"></script>
   </body>
 </html>
