@@ -36,6 +36,14 @@
       "scale": {
         "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
         "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+      },
+      "legend": {
+        "symbolSize": 200,
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "titlePadding": 20,
+        "symbolStrokeWidth": 2,
+        "rowPadding": 12
       }
     },
     "tooltip": [

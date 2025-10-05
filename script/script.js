@@ -47,96 +47,12 @@ function loadVisualizations() {
 
 // Generic function to load a visualization
 function loadVisualization(jsonFile, containerId, type) {
-  // Fetch the JSON file
   fetch(jsonFile)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Failed to load ${jsonFile}: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((spec) => {
-      // Embed the visualization
-      const embedOptions = {
-        mode: type, // "vega" or "vega-lite"
-        actions: {
-          export: true,
-          source: false,
-          compiled: false,
-          editor: false,
-        },
-      };
-
-      vegaEmbed(containerId, spec, embedOptions)
-        .then((result) => {
-          console.log(`${jsonFile} loaded successfully`);
-        })
-        .catch((error) => {
-          console.error(`Error embedding ${jsonFile}:`, error);
-          document.querySelector(
-            containerId
-          ).innerHTML = `<p style="color: red;">Error loading visualization: ${error.message}</p>`;
-        });
-    })
-    .catch((error) => {
-      console.error(`Error fetching ${jsonFile}:`, error);
-      document.querySelector(
-        containerId
-      ).innerHTML = `<p style="color: red;">Error loading ${jsonFile}: ${error.message}</p>`;
-    });
+    .then((response) => response.json())
+    .then((spec) => vegaEmbed(containerId, spec, { actions: false }));
 }
-
-// Utility function for drawing donut charts (for future use)
-function drawDonutChart(canvasId, data, colors) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-
-  const ctx = canvas.getContext("2d");
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2;
-  const radius = Math.min(centerX, centerY) - 20;
-  const innerRadius = radius * 0.6;
-
-  let currentAngle = -Math.PI / 2;
-
-  data.forEach((value, index) => {
-    const sliceAngle = (value / 100) * 2 * Math.PI;
-
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-    ctx.arc(
-      centerX,
-      centerY,
-      innerRadius,
-      currentAngle + sliceAngle,
-      currentAngle,
-      true
-    );
-    ctx.closePath();
-    ctx.fillStyle = colors[index];
-    ctx.fill();
-
-    currentAngle += sliceAngle;
-  });
-
-  // Draw center circle
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, innerRadius, 0, 2 * Math.PI);
-  ctx.fillStyle = "white";
-  ctx.fill();
-}
-
-// Color palette for charts
-const chartColors = {
-  primary: "#0f4c5c",
-  secondary: "#16697a",
-  tertiary: "#489fb5",
-  accent: "#9bc53d",
-};
 
 // Export functions for use in future chart implementations
 window.dashboardUtils = {
-  drawDonutChart,
-  chartColors,
   loadVisualization,
 };
