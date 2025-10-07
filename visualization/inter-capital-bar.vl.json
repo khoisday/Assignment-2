@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 400,
+  "title": {
+    "text": "Inter-Capital City Passenger Volumes (2023-24)",
+    "subtitle": "Annual passenger volumes in thousands",
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/inter-capital-city-passenger.csv"
+  },
+  "transform": [
+    {"filter": "datum[''] == '2023-24'"},
+    {
+      "fold": [
+        "Syd-Mel",
+        "Syd-Cbr",
+        "Syd-Bne",
+        "Mel-Adl",
+        "Mel-Bne",
+        "Syd-Adl"
+      ],
+      "as": ["route", "passengers_str"]
+    },
+    {
+      "calculate": "toNumber(replace(datum.passengers_str, ' ', ''))",
+      "as": "passengers"
+    }
+  ],
+  "mark": {"type": "bar", "cornerRadiusTopLeft": 4, "cornerRadiusTopRight": 4},
+  "encoding": {
+    "y": {
+      "field": "route",
+      "type": "nominal",
+      "title": "Route",
+      "sort": {"field": "passengers", "order": "descending"},
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "titleFontWeight": 600,
+        "titleColor": "#2c5f6f",
+        "titleAngle": 0
+      }
+    },
+    "x": {
+      "field": "passengers",
+      "type": "quantitative",
+      "title": "Passengers (thousands)",
+      "axis": {
+        "labelFontSize": 11,
+        "titleFontSize": 13,
+        "titleFontWeight": 600,
+        "titleColor": "#2c5f6f",
+        "grid": true,
+        "gridOpacity": 0.3
+      }
+    },
+    "color": {
+      "field": "passengers",
+      "type": "quantitative",
+      "scale": {"range": ["#a0dde6", "#0d7a8a"]},
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "route", "type": "nominal", "title": "Route"},
+      {
+        "field": "passengers",
+        "type": "quantitative",
+        "title": "Passengers (000s)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+  }
+}
