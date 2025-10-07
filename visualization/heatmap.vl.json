@@ -1,0 +1,143 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "title": {
+    "text": "Daily Public Transport Usage Calendar",
+    "subtitle": [
+      "Total passengers per day (28 July - 31 August 2024)",
+      "(Darker shades indicate higher daily passenger volume)"
+    ],
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/Daily_public_transport_usage.csv"
+  },
+  "transform": [
+    {"calculate": "split(datum.Date, '/')", "as": "dateParts"},
+    {"calculate": "toNumber(datum.dateParts[0])", "as": "day"},
+    {"calculate": "toNumber(datum.dateParts[1])", "as": "month"},
+    {"calculate": "toNumber(datum.dateParts[2])", "as": "year"},
+    {
+      "calculate": "datetime(datum.year, datum.month - 1, datum.day)",
+      "as": "date"
+    },
+    {"calculate": "day(datum.date)", "as": "dayOfWeek"},
+    {
+      "calculate": "floor((time(datum.date) - time(datetime(2024, 6, 28))) / (7 * 24 * 60 * 60 * 1000))",
+      "as": "week"
+    },
+    {
+      "calculate": "toNumber(replace(datum.Total, ',', ''))",
+      "as": "totalPassengers"
+    },
+    {
+      "calculate": "format(datum.totalPassengers / 1000, '.1f') + 'K'",
+      "as": "formattedTotal"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 4,
+        "stroke": "#ffffff",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "dayOfWeek",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "orient": "top",
+            "labelExpr": "['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][datum.value]",
+            "labelFontSize": 13,
+            "labelFontWeight": 600,
+            "labelColor": "#2c5f6f",
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "y": {"field": "week", "type": "ordinal", "title": null, "axis": null},
+        "color": {
+          "field": "totalPassengers",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#e0f2f7",
+              "#b3dde6",
+              "#66c2d4",
+              "#29a3a3",
+              "#007b83",
+              "#005f66"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "Date", "type": "nominal", "title": "Date"},
+          {
+            "field": "totalPassengers",
+            "type": "quantitative",
+            "title": "Total Passengers",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "top",
+        "dx": 42,
+        "dy": -35,
+        "fontSize": 10,
+        "fontWeight": 500
+      },
+      "encoding": {
+        "x": {"field": "dayOfWeek", "type": "ordinal"},
+        "y": {"field": "week", "type": "ordinal"},
+        "text": {"field": "day", "type": "nominal"},
+        "color": {
+          "condition": {
+            "test": "datum.totalPassengers > 30000",
+            "value": "#b3dde6"
+          },
+          "value": "#5a7d8a"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 14,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {"field": "dayOfWeek", "type": "ordinal"},
+        "y": {"field": "week", "type": "ordinal"},
+        "text": {"field": "formattedTotal", "type": "nominal"},
+        "color": {
+          "condition": {
+            "test": "datum.totalPassengers > 30000",
+            "value": "#ffffff"
+          },
+          "value": "#1e4d5c"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+  }
+}
