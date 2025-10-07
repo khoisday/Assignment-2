@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 400,
+  "title": {
+    "text": "Public Transport Usage by Capital City",
+    "subtitle": "Annual passenger trips in millions",
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/public-trans-capital-city.csv"
+  },
+  "transform": [
+    {
+      "fold": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
+      "as": ["Mode", "Value"]
+    },
+    {"calculate": "replace(datum['City﻿'], '﻿', '')", "as": "City"}
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopRight": 4,
+    "cornerRadiusBottomRight": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "City",
+      "type": "nominal",
+      "sort": {"op": "sum", "field": "Value", "order": "ascending"},
+      "axis": {
+        "title": "City",
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "titleFontWeight": 600,
+        "titleColor": "#2c5f6f",
+        "titleAngle": 0
+      }
+    },
+    "x": {
+      "aggregate": "sum",
+      "field": "Value",
+      "type": "quantitative",
+      "axis": {
+        "title": "Million Passenger Trips",
+        "labelFontSize": 11,
+        "titleFontSize": 13,
+        "titleFontWeight": 600,
+        "titleColor": "#2c5f6f",
+        "grid": true,
+        "gridOpacity": 0.3
+      }
+    },
+    "color": {
+      "field": "Mode",
+      "type": "nominal",
+      "title": "Transport Mode",
+      "scale": {
+        "domain": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
+        "range": ["#007b83", "#29a3a3", "#4caf50", "#fbc02d"]
+      }
+    },
+    "tooltip": [
+      {"field": "City", "type": "nominal", "title": "City"},
+      {"field": "Mode", "type": "nominal", "title": "Transport Mode"},
+      {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Passengers (M)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+  }
+}
