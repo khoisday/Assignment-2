@@ -133,6 +133,20 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Remove padding and border for map chart container */
+.chart-container:has(#map-chart) {
+  padding: 15px 15px 15px 15px;
+  border: none;
+  overflow: hidden;
+}
+
+#map-chart {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
 .chart-title {
   color: #0f4c5c;
   font-size: 16px;
@@ -145,7 +159,10 @@ body {
 /* Vega visualization containers */
 #pie-chart,
 #line-chart,
-#map-chart {
+#map-chart,
+#public-transport-chart,
+#inter-capital-chart,
+#heatmap-chart {
   width: 100%;
   min-height: 300px;
   display: flex;
@@ -154,7 +171,132 @@ body {
 }
 
 #map-chart {
-  min-height: 600px;
+  min-height: 650px;
+  flex-direction: column;
+  padding: 0 !important;
+}
+
+/* Force map controls to appear below the visualization */
+#map-chart .vega-embed {
+  width: 100%;
+  display: grid !important;
+  grid-template-areas:
+    "controls"
+    "chart"
+    "actions";
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+#map-chart .vega-embed .vega-bindings,
+#map-chart .vega-embed form {
+  grid-area: controls;
+  margin: 0 0 15px 0 !important;
+  padding: 15px !important;
+  background: #f5f7fa !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  gap: 20px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border: none !important;
+}
+
+#map-chart .vega-embed > div {
+  grid-area: chart;
+  border: none !important;
+  outline: none !important;
+}
+
+#map-chart .vega-embed details {
+  grid-area: actions;
+}
+
+#map-chart .vega-bind {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin: 0 !important;
+}
+
+#map-chart .vega-bind-name {
+  font-weight: 600 !important;
+  color: #0f4c5c !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+#map-chart .vega-bind input,
+#map-chart .vega-bind select {
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  background: white !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+#map-chart .vega-bind input[type="range"] {
+  width: 130px !important;
+  margin: 0 10px !important;
+  vertical-align: middle !important;
+  position: relative !important;
+  top: 0 !important;
+}
+
+#map-chart .vega-bind input[type="range"]::-webkit-slider-thumb {
+  margin-top: 0 !important;
+}
+
+#map-chart .vega-bind input[type="range"]::-moz-range-thumb {
+  margin-top: 0 !important;
+}
+
+/* Align the number display next to slider */
+#map-chart .vega-bind:has(input[type="range"]) {
+  align-items: center !important;
+}
+
+#map-chart .vega-bind span {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Remove padding from the SVG container */
+#map-chart svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  outline: none !important;
+}
+
+#map-chart canvas {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  outline: none !important;
+}
+
+#map-chart * {
+  border-color: transparent !important;
+}
+
+#map-chart .vega-embed summary {
+  border: none !important;
+}
+
+#heatmap-chart {
+  min-height: 400px;
 }
 
 /* Vega embed actions styling */

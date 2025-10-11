@@ -57,6 +57,7 @@
           "axis": {
             "orient": "top",
             "labelExpr": "['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][datum.value]",
+            "labelAngle": 0,
             "labelFontSize": 13,
             "labelFontWeight": 600,
             "labelColor": "#2c5f6f",

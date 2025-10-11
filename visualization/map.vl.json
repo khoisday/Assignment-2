@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1300,
+  "height": 600,
+  "background": "#C0D2D3",
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 35000,
+      "bind": {
+        "input": "range",
+        "min": 5000,
+        "max": 50000,
+        "step": 1000,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "map_center",
+      "value": "Melbourne CBD",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Melbourne CBD",
+          "Sydney CBD",
+          "Brisbane CBD",
+          "Perth CBD",
+          "Adelaide CBD",
+          "Canberra",
+          "Hobart",
+          "Darwin",
+          "All Australia"
+        ],
+        "name": "Map Centre: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "scale": {
+      "expr": "zoom_level"
+    },
+    "center": {
+      "expr": "map_center == 'Melbourne CBD' ? [144.9631, -37.8136] : map_center == 'Sydney CBD' ? [151.2093, -33.8688] : map_center == 'Brisbane CBD' ? [153.0251, -27.4698] : map_center == 'Perth CBD' ? [115.8605, -31.9505] : map_center == 'Adelaide CBD' ? [138.6007, -34.9285] : map_center == 'Canberra' ? [149.1300, -35.2809] : map_center == 'Hobart' ? [147.3272, -42.8821] : map_center == 'Darwin' ? [130.8456, -12.4634] : [133.7751, -25.2744]"
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#C0D2D3"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/ferocia/australia-geojsons/master/outputs/au-postcodes-Visvalingam-5.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.POA_CODE",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/Postal_method_to_work.csv"
+            },
+            "key": "postcode",
+            "fields": ["Vehicle", "Total"]
+          }
+        },
+        {
+          "calculate": "toNumber(datum.Vehicle)",
+          "as": "VehicleNum"
+        },
+        {
+          "calculate": "toNumber(datum.Total)",
+          "as": "TotalNum"
+        },
+        {
+          "calculate": "datum.TotalNum > 0 ? (datum.VehicleNum / datum.TotalNum) * 100 : null",
+          "as": "Percentage"
+        },
+        {
+          "filter": "datum.Percentage != null"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "Percentage",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "redyellowgreen",
+            "domain": [3, 56],
+            "reverse": true,
+            "clamp": true
+          },
+          "legend": {
+            "title": "Private Transport %",
+            "orient": "top-left",
+            "direction": "horizontal",
+            "gradientLength": 200,
+            "gradientThickness": 15,
+            "format": ".0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.POA_CODE",
+            "type": "nominal",
+            "title": "Postcode"
+          },
+          {
+            "field": "Percentage",
+            "type": "quantitative",
+            "title": "Private Transport %",
+            "format": ".1f"
+          },
+          {
+            "field": "VehicleNum",
+            "type": "quantitative",
+            "title": "Vehicle Users",
+            "format": ","
+          },
+          {
+            "field": "TotalNum",
+            "type": "quantitative",
+            "title": "Total Commuters",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#333",
+        "strokeWidth": 1.5
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "padding": 0,
+    "autosize": {
+      "type": "fit",
+      "contains": "padding"
+    }
+  }
+}

@@ -41,8 +41,29 @@ function loadVisualizations() {
     "vega-lite"
   );
 
-  // Load map visualization (visualization.vg.json)
-  loadVisualization("visualization/map.vg.json", "#map-chart", "vega");
+  // Load map visualization (map.vl.json)
+  loadVisualization("visualization/map.vl.json", "#map-chart", "vega-lite");
+
+  // Load public transport by city chart (public-transport-by-city.vl.json)
+  loadVisualization(
+    "visualization/public-transport-by-city.vl.json",
+    "#public-transport-chart",
+    "vega-lite"
+  );
+
+  // Load inter-capital bar chart (inter-capital-bar.vl.json)
+  loadVisualization(
+    "visualization/inter-capital-bar.vl.json",
+    "#inter-capital-chart",
+    "vega-lite"
+  );
+
+  // Load heatmap visualization (heatmap.vl.json)
+  loadVisualization(
+    "visualization/heatmap.vl.json",
+    "#heatmap-chart",
+    "vega-lite"
+  );
 }
 
 // Generic function to load a visualization
