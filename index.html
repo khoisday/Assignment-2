@@ -18,15 +18,6 @@
         <div class="period">Annual Report 2024</div>
       </div>
 
-      <div class="filters">
-        <button class="filter-btn active">All Regions</button>
-        <button class="filter-btn">NSW</button>
-        <button class="filter-btn">VIC</button>
-        <button class="filter-btn">QLD</button>
-        <button class="filter-btn">WA</button>
-        <button class="filter-btn">SA</button>
-      </div>
-
       <div class="metrics-row">
         <div class="metric-card">
           <div class="metric-icon">✈️</div>
@@ -61,6 +52,51 @@
         </div>
       </div>
 
+      <div class="description-section">
+        <p>
+          Our transportation infrastructure serves 102.7 million passenger
+          journeys annually, representing a healthy 4.8% year-over-year growth
+          that reflects increasing public trust and utilization. The network
+          spans 32,929 kilometers of active rail infrastructure complemented by
+          877,000 kilometers of road coverage, providing comprehensive
+          connectivity across the region. System performance remains strong,
+          with passenger satisfaction consistently maintained between 80-90%,
+          indicating effective service delivery and operational reliability.
+          This integrated multi-modal approach continues to support regional
+          mobility needs while demonstrating capacity for sustained growth and
+          quality service standards.
+        </p>
+      </div>
+
+      <div class="heatmap-section">
+        <div class="heatmap-container">
+          <div id="heatmap-chart"></div>
+        </div>
+
+        <div class="heatmap-textbox">
+          <div class="textbox-content">
+            <p>
+              Weekdays see consistent usage between 49-56K daily passengers,
+              with Tuesday and Wednesday showing the highest peaks.
+            </p>
+            <p>
+              Fridays consistently record the lowest weekday ridership
+              (~50-52K), suggesting remote work adoption and early weekend
+              departures.
+            </p>
+            <p>
+              August 22 saw the period's lowest weekday usage at 49.2K—a 10%
+              drop from typical Thursdays, potentially due to weather
+              disruptions or local events during this mid-winter period.
+            </p>
+            <p>
+              Weekends drop by 63% to ~19K, showing transport is primarily
+              work-driven with minimal recreational travel.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Visualization Charts -->
       <div class="charts-grid-2col">
         <div class="chart-container">
@@ -79,21 +115,29 @@
         <div id="map-chart"></div>
       </div>
 
-      <div class="charts-grid-2col">
-        <div class="chart-container">
-          <div class="chart-title">Public Transport by City</div>
-          <div id="public-transport-chart"></div>
+      <div class="public-transport-section">
+        <div class="public-transport-textbox">
+          <div class="textbox-content">
+            <p>
+              Sydney and Melbourne dominate Australia's public transport,
+              accounting for 75% of all trips.
+            </p>
+            <p>
+              Sydney relies heavily on buses and trains, while Melbourne's
+              iconic tram network remains the largest in the world.
+            </p>
+            <p>Per capita: Both cities average 120 trips/person/yr</p>
+          </div>
         </div>
 
-        <div class="chart-container">
-          <div class="chart-title">Inter-Capital Travel</div>
-          <div id="inter-capital-chart"></div>
+        <div class="public-transport-chart-container">
+          <div id="public-transport-chart"></div>
         </div>
       </div>
 
-      <div class="chart-container" style="margin-bottom: 20px">
-        <div class="chart-title">Transport Activity Heatmap</div>
-        <div id="heatmap-chart"></div>
+      <div class="chart-container">
+        <div class="chart-title">Inter-Capital Travel</div>
+        <div id="inter-capital-chart"></div>
       </div>
     </div>
 

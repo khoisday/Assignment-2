@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
+  "width": 900,
   "height": 400,
   "title": {
     "text": "Daily Public Transport Usage Calendar",
@@ -19,15 +19,15 @@
     "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/Daily_public_transport_usage.csv"
   },
   "transform": [
-    {"calculate": "split(datum.Date, '/')", "as": "dateParts"},
-    {"calculate": "toNumber(datum.dateParts[0])", "as": "day"},
-    {"calculate": "toNumber(datum.dateParts[1])", "as": "month"},
-    {"calculate": "toNumber(datum.dateParts[2])", "as": "year"},
+    { "calculate": "split(datum.Date, '/')", "as": "dateParts" },
+    { "calculate": "toNumber(datum.dateParts[0])", "as": "day" },
+    { "calculate": "toNumber(datum.dateParts[1])", "as": "month" },
+    { "calculate": "toNumber(datum.dateParts[2])", "as": "year" },
     {
       "calculate": "datetime(datum.year, datum.month - 1, datum.day)",
       "as": "date"
     },
-    {"calculate": "day(datum.date)", "as": "dayOfWeek"},
+    { "calculate": "day(datum.date)", "as": "dayOfWeek" },
     {
       "calculate": "floor((time(datum.date) - time(datetime(2024, 6, 28))) / (7 * 24 * 60 * 60 * 1000))",
       "as": "week"
@@ -65,7 +65,12 @@
             "ticks": false
           }
         },
-        "y": {"field": "week", "type": "ordinal", "title": null, "axis": null},
+        "y": {
+          "field": "week",
+          "type": "ordinal",
+          "title": null,
+          "axis": null
+        },
         "color": {
           "field": "totalPassengers",
           "type": "quantitative",
@@ -82,7 +87,7 @@
           "legend": null
         },
         "tooltip": [
-          {"field": "Date", "type": "nominal", "title": "Date"},
+          { "field": "Date", "type": "nominal", "title": "Date" },
           {
             "field": "totalPassengers",
             "type": "quantitative",
@@ -103,9 +108,9 @@
         "fontWeight": 500
       },
       "encoding": {
-        "x": {"field": "dayOfWeek", "type": "ordinal"},
-        "y": {"field": "week", "type": "ordinal"},
-        "text": {"field": "day", "type": "nominal"},
+        "x": { "field": "dayOfWeek", "type": "ordinal" },
+        "y": { "field": "week", "type": "ordinal" },
+        "text": { "field": "day", "type": "nominal" },
         "color": {
           "condition": {
             "test": "datum.totalPassengers > 30000",
@@ -124,9 +129,9 @@
         "fontWeight": 600
       },
       "encoding": {
-        "x": {"field": "dayOfWeek", "type": "ordinal"},
-        "y": {"field": "week", "type": "ordinal"},
-        "text": {"field": "formattedTotal", "type": "nominal"},
+        "x": { "field": "dayOfWeek", "type": "ordinal" },
+        "y": { "field": "week", "type": "ordinal" },
+        "text": { "field": "formattedTotal", "type": "nominal" },
         "color": {
           "condition": {
             "test": "datum.totalPassengers > 30000",
@@ -138,7 +143,7 @@
     }
   ],
   "config": {
-    "view": {"stroke": "transparent"},
-    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+    "view": { "stroke": "transparent" },
+    "axis": { "domainColor": "#2c5f6f", "tickColor": "#2c5f6f" }
   }
 }

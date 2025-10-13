@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 600,
+  "width": 800,
   "height": 400,
   "title": {
     "text": "Public Transport Usage by Capital City",
@@ -20,63 +20,95 @@
       "fold": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
       "as": ["Mode", "Value"]
     },
-    {"calculate": "replace(datum['City﻿'], '﻿', '')", "as": "City"}
+    { "calculate": "replace(datum['City﻿'], '﻿', '')", "as": "City" }
   ],
-  "mark": {
-    "type": "bar",
-    "cornerRadiusTopRight": 4,
-    "cornerRadiusBottomRight": 4
-  },
-  "encoding": {
-    "y": {
-      "field": "City",
-      "type": "nominal",
-      "sort": {"op": "sum", "field": "Value", "order": "ascending"},
-      "axis": {
-        "title": "City",
-        "labelFontSize": 12,
-        "titleFontSize": 13,
-        "titleFontWeight": 600,
-        "titleColor": "#2c5f6f",
-        "titleAngle": 0
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 4,
+        "cornerRadiusTopRight": 4
+      },
+      "encoding": {
+        "x": {
+          "field": "City",
+          "type": "nominal",
+          "sort": { "op": "sum", "field": "Value", "order": "descending" },
+          "axis": {
+            "title": "City",
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titleFontWeight": 600,
+            "titleColor": "#2c5f6f",
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "Value",
+          "type": "quantitative",
+          "axis": {
+            "title": "Million Passenger Trips",
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "titleFontWeight": 600,
+            "titleColor": "#2c5f6f",
+            "grid": true,
+            "gridOpacity": 0.3
+          }
+        },
+        "color": {
+          "field": "Mode",
+          "type": "nominal",
+          "title": "Transport Mode",
+          "scale": {
+            "domain": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
+            "range": ["#007b83", "#29a3a3", "#4caf50", "#fbc02d"]
+          }
+        },
+        "tooltip": [
+          { "field": "City", "type": "nominal", "title": "City" },
+          { "field": "Mode", "type": "nominal", "title": "Transport Mode" },
+          {
+            "field": "Value",
+            "type": "quantitative",
+            "title": "Passengers (M)",
+            "format": ".1f"
+          }
+        ]
       }
     },
-    "x": {
-      "aggregate": "sum",
-      "field": "Value",
-      "type": "quantitative",
-      "axis": {
-        "title": "Million Passenger Trips",
-        "labelFontSize": 11,
-        "titleFontSize": 13,
-        "titleFontWeight": 600,
-        "titleColor": "#2c5f6f",
-        "grid": true,
-        "gridOpacity": 0.3
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -5,
+        "fontWeight": 600,
+        "fontSize": 11,
+        "color": "#2c5f6f"
+      },
+      "encoding": {
+        "x": {
+          "field": "City",
+          "type": "nominal",
+          "sort": { "op": "sum", "field": "Value", "order": "descending" }
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "Value",
+          "type": "quantitative"
+        },
+        "text": {
+          "aggregate": "sum",
+          "field": "Value",
+          "type": "quantitative",
+          "format": ".0f"
+        }
       }
-    },
-    "color": {
-      "field": "Mode",
-      "type": "nominal",
-      "title": "Transport Mode",
-      "scale": {
-        "domain": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
-        "range": ["#007b83", "#29a3a3", "#4caf50", "#fbc02d"]
-      }
-    },
-    "tooltip": [
-      {"field": "City", "type": "nominal", "title": "City"},
-      {"field": "Mode", "type": "nominal", "title": "Transport Mode"},
-      {
-        "field": "Value",
-        "type": "quantitative",
-        "title": "Passengers (M)",
-        "format": ".1f"
-      }
-    ]
-  },
+    }
+  ],
   "config": {
-    "view": {"stroke": "transparent"},
-    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+    "view": { "stroke": "transparent" },
+    "axis": { "domainColor": "#2c5f6f", "tickColor": "#2c5f6f" }
   }
 }
