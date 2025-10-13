@@ -12,35 +12,104 @@
     },
     { "filter": "datum.value != null" },
     { "joinaggregate": [{ "op": "sum", "field": "value", "as": "total" }] },
-    { "calculate": "datum.value / datum.total", "as": "percentage" }
+    { "calculate": "datum.value / datum.total", "as": "percentage" },
+    {
+      "calculate": "datum.mode === 'Passenger cars' ? 1 : datum.mode === 'Rail' ? 2 : datum.mode === 'Air' ? 3 : datum.mode === 'Other ' ? 4 : 5",
+      "as": "order"
+    },
+    {
+      "window": [{ "op": "rank", "as": "rank" }],
+      "sort": [{ "field": "order", "order": "ascending" }]
+    },
+    {
+      "calculate": "format(datum.percentage, '.1%')",
+      "as": "percentageText"
+    },
+    {
+      "calculate": "datum.mode === 'Passenger cars' ? 'Car' : datum.mode",
+      "as": "modeLabel"
+    }
   ],
-  "mark": { "type": "arc" },
-  "encoding": {
-    "theta": { "field": "value", "type": "quantitative", "stack": "normalize" },
-    "color": {
-      "field": "mode",
-      "type": "nominal",
-      "legend": null,
-      "scale": {
-        "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
-        "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+  "layer": [
+    {
+      "mark": { "type": "arc", "outerRadius": 100 },
+      "encoding": {
+        "order": { "field": "order", "type": "quantitative" },
+        "theta": {
+          "field": "value",
+          "type": "quantitative",
+          "stack": "normalize"
+        },
+        "color": {
+          "field": "mode",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
+            "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+          }
+        },
+        "tooltip": [
+          { "field": "mode", "type": "nominal", "title": "Transport Mode" },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Distance Traveled (Billion km)",
+            "format": ".1f"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".1%"
+          }
+        ]
       }
     },
-    "tooltip": [
-      { "field": "mode", "type": "nominal", "title": "Transport Mode" },
-      {
-        "field": "value",
-        "type": "quantitative",
-        "title": "Distance Traveled (Billion km)",
-        "format": ".1f"
+    {
+      "mark": {
+        "type": "text",
+        "radius": 120,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#0f4c5c",
+        "dy": -6
       },
-      {
-        "field": "percentage",
-        "type": "quantitative",
-        "title": "Percentage",
-        "format": ".1%"
+      "encoding": {
+        "order": { "field": "order", "type": "quantitative" },
+        "theta": {
+          "field": "value",
+          "type": "quantitative",
+          "stack": "normalize"
+        },
+        "text": {
+          "field": "modeLabel",
+          "type": "nominal"
+        }
       }
-    ]
-  },
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 120,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#0f4c5c",
+        "dy": 6
+      },
+      "encoding": {
+        "order": { "field": "order", "type": "quantitative" },
+        "theta": {
+          "field": "value",
+          "type": "quantitative",
+          "stack": "normalize"
+        },
+        "text": {
+          "field": "percentageText",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
   "config": {}
 }

@@ -75,14 +75,7 @@
           "field": "totalPassengers",
           "type": "quantitative",
           "scale": {
-            "range": [
-              "#e0f2f7",
-              "#b3dde6",
-              "#66c2d4",
-              "#29a3a3",
-              "#007b83",
-              "#005f66"
-            ]
+            "range": ["#29a3a3", "#007b83", "#005f66"]
           },
           "legend": null
         },

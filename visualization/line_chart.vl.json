@@ -13,48 +13,86 @@
     },
     { "filter": "datum.value != null" }
   ],
-  "mark": { "type": "line", "point": true },
-  "encoding": {
-    "x": {
-      "field": "Financial year",
-      "type": "ordinal",
-      "title": "Financial Year",
-      "axis": {
-        "labelAngle": 0,
-        "labelExpr": "split(datum.label, '-')[0] % 5 == 0 || datum.label == '2023-24' ? datum.label : ''"
+  "layer": [
+    {
+      "mark": { "type": "line", "point": true },
+      "encoding": {
+        "x": {
+          "field": "Financial year",
+          "type": "ordinal",
+          "title": "Financial Year",
+          "axis": {
+            "labelAngle": 0,
+            "labelExpr": "split(datum.label, '-')[0] % 5 == 0 || datum.label == '2023-24' ? datum.label : ''"
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Billion Passenger km"
+        },
+        "color": {
+          "field": "mode",
+          "type": "nominal",
+          "title": "Transport Mode",
+          "scale": {
+            "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
+            "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+          },
+          "legend": {
+            "symbolSize": 200,
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titlePadding": 20,
+            "symbolStrokeWidth": 2,
+            "rowPadding": 12
+          }
+        },
+        "tooltip": [
+          { "field": "Financial year", "type": "ordinal", "title": "Year" },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Distance Traveled (Billion km)",
+            "format": ".1f"
+          }
+        ]
       }
     },
-    "y": {
-      "field": "value",
-      "type": "quantitative",
-      "title": "Billion Passenger km"
-    },
-    "color": {
-      "field": "mode",
-      "type": "nominal",
-      "title": "Transport Mode",
-      "scale": {
-        "domain": ["Passenger cars", "Buses", "Rail", "Air", "Other "],
-        "range": ["#0f4c5c", "#9bc53d", "#489fb5", "#16697a", "#7a8c99"]
+    {
+      "data": {
+        "values": [{ "year": "2019-20", "y": 220 }]
       },
-      "legend": {
-        "symbolSize": 200,
-        "labelFontSize": 12,
-        "titleFontSize": 13,
-        "titlePadding": 20,
-        "symbolStrokeWidth": 2,
-        "rowPadding": 12
-      }
-    },
-    "tooltip": [
-      { "field": "Financial year", "type": "ordinal", "title": "Year" },
-      {
-        "field": "value",
-        "type": "quantitative",
-        "title": "Distance Traveled (Billion km)",
-        "format": ".1f"
-      }
-    ]
-  },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4],
+            "strokeWidth": 2,
+            "color": "#d62828"
+          },
+          "encoding": {
+            "x": { "field": "year", "type": "ordinal" }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "dx": -55,
+            "dy": -10,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#d62828"
+          },
+          "encoding": {
+            "x": { "field": "year", "type": "ordinal" },
+            "y": { "field": "y", "type": "quantitative" },
+            "text": { "value": "COVID-19 Impact" }
+          }
+        }
+      ]
+    }
+  ],
   "config": {}
 }
