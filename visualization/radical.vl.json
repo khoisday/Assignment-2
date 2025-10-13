@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 500,
+  "height": 350,
+  "title": {
+    "text": "Monthly Public Transport Usage",
+    "subtitle": "Total passengers per month (in millions)",
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/monthly_public_transport_patronage_by_mode.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    { "calculate": "datum.Total / 1000000", "as": "TotalMillions" },
+    { "calculate": "trim(datum['Month name'])", "as": "MonthClean" },
+    {
+      "calculate": "{'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6, 'July': 7, 'August': 8, 'September': 9, 'October': 10, 'November': 11, 'December': 12}[datum.MonthClean]",
+      "as": "month_order"
+    },
+    { "filter": "datum.month_order != null" }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 20,
+        "stroke": "#fff",
+        "strokeWidth": 1,
+        "tooltip": true
+      },
+      "encoding": {
+        "order": { "field": "month_order", "type": "quantitative" },
+        "tooltip": [
+          { "field": "MonthClean", "type": "nominal", "title": "Month" },
+          {
+            "field": "TotalMillions",
+            "type": "quantitative",
+            "title": "Total Passengers (M)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 30,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#1e4d5c",
+        "dy": -10
+      },
+      "encoding": {
+        "order": { "field": "month_order", "type": "quantitative" },
+        "text": { "field": "MonthClean", "type": "nominal" }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 25,
+        "fontSize": 13,
+        "fontWeight": 600,
+        "color": "#005f66",
+        "dy": 5
+      },
+      "encoding": {
+        "order": { "field": "month_order", "type": "quantitative" },
+        "text": {
+          "field": "TotalMillions",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "encoding": {
+    "theta": {
+      "field": "TotalMillions",
+      "type": "quantitative",
+      "stack": true
+    },
+    "radius": {
+      "field": "TotalMillions",
+      "scale": {
+        "type": "linear",
+        "zero": false,
+        "domain": [30, 50],
+        "range": [80, 180]
+      }
+    },
+    "color": {
+      "value": "#00686F"
+    }
+  },
+  "config": { "view": { "stroke": "transparent" } }
+}

@@ -1,5 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 300,
+  "height": 300,
+  "title": {
+    "text": "Transport Mode Distribution",
+    "subtitle": "Percentage share by transport type (2023-24)",
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/different-transport.csv",
     "format": { "type": "csv" }
@@ -32,7 +44,7 @@
   ],
   "layer": [
     {
-      "mark": { "type": "arc", "outerRadius": 100 },
+      "mark": { "type": "arc", "outerRadius": 140 },
       "encoding": {
         "order": { "field": "order", "type": "quantitative" },
         "theta": {
@@ -69,8 +81,8 @@
     {
       "mark": {
         "type": "text",
-        "radius": 120,
-        "fontSize": 11,
+        "radius": 160,
+        "fontSize": 12,
         "fontWeight": 600,
         "color": "#0f4c5c",
         "dy": -6
@@ -91,7 +103,7 @@
     {
       "mark": {
         "type": "text",
-        "radius": 120,
+        "radius": 160,
         "fontSize": 12,
         "fontWeight": 600,
         "color": "#0f4c5c",

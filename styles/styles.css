@@ -133,7 +133,7 @@ body {
 
 .description-section p {
   color: #333;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.7;
   margin: 0;
   text-align: justify;
@@ -495,7 +495,7 @@ body {
 
 .textbox-content p {
   color: #333;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.7;
   margin-bottom: 15px;
 }
@@ -532,7 +532,7 @@ body {
 
 .public-transport-textbox p {
   color: #333;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.7;
   margin-bottom: 15px;
 }
@@ -547,4 +547,42 @@ body {
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Radical Plot Section */
+.radical-section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.radical-chart-container {
+  background: white;
+  border: 1px solid #e8ecf1;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.radical-textbox {
+  background: white;
+  border: 1px solid #e8ecf1;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.radical-textbox p {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.radical-textbox p:last-child {
+  margin-bottom: 0;
 }

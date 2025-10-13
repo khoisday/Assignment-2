@@ -1,7 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 850,
-  "height": 230,
+  "width": 750,
+  "height": 300,
+  "title": {
+    "text": "Transport Trends Over Time",
+    "subtitle": "Passenger distance traveled by mode (1975-2024)",
+    "fontSize": 18,
+    "fontWeight": 600,
+    "color": "#1e4d5c",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#5a7d8a",
+    "anchor": "start"
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/different-transport.csv",
     "format": { "type": "csv" }
@@ -23,13 +33,25 @@
           "title": "Financial Year",
           "axis": {
             "labelAngle": 0,
-            "labelExpr": "split(datum.label, '-')[0] % 5 == 0 || datum.label == '2023-24' ? datum.label : ''"
+            "labelExpr": "split(datum.label, '-')[0] % 5 == 0 || datum.label == '2023-24' ? datum.label : ''",
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titleFontWeight": 600,
+            "titleColor": "#2c5f6f"
           }
         },
         "y": {
           "field": "value",
           "type": "quantitative",
-          "title": "Billion Passenger km"
+          "title": "Billion Passenger km",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "titleFontWeight": 600,
+            "titleColor": "#2c5f6f",
+            "grid": true,
+            "gridOpacity": 0.3
+          }
         },
         "color": {
           "field": "mode",

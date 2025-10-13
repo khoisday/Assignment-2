@@ -41,6 +41,13 @@ function loadVisualizations() {
     "vega-lite"
   );
 
+  // Load radical plot (radical.vl.json)
+  loadVisualization(
+    "visualization/radical.vl.json",
+    "#radical-chart",
+    "vega-lite"
+  );
+
   // Load map visualization (map.vl.json)
   loadVisualization("visualization/map.vl.json", "#map-chart", "vega-lite");
 
