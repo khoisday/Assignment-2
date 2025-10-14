@@ -21,17 +21,18 @@ body {
 
 .header {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .header h1 {
   color: #0f4c5c;
-  font-size: 28px;
+  font-size: 36px;
   margin-bottom: 5px;
 }
 
 .header .period {
   color: #666;
-  font-size: 16px;
+  font-size: 24px;
 }
 
 .filters {
@@ -585,4 +586,64 @@ body {
 
 .radical-textbox p:last-child {
   margin-bottom: 0;
+}
+
+/* Map Description Text Box */
+.map-description-textbox {
+  background: white;
+  border: 1px solid #e8ecf1;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.map-description-textbox .textbox-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-description-textbox p {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Inter-Capital Travel Section with Text Box on Left */
+.inter-capital-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.inter-capital-textbox {
+  background: white;
+  border: 1px solid #e8ecf1;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inter-capital-textbox p {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.inter-capital-textbox p:last-child {
+  margin-bottom: 0;
+}
+
+.inter-capital-chart-container {
+  background: white;
+  border: 1px solid #e8ecf1;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
