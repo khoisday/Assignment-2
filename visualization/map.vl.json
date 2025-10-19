@@ -56,7 +56,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/ferocia/australia-geojsons/master/outputs/au-postcodes-Visvalingam-5.geojson",
+        "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/main/data/Sa2-boundary.geojson",
         "format": {
           "type": "json",
           "property": "features"
@@ -141,7 +141,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/main/data/states.geojson",
         "format": {
           "type": "json",
           "property": "features"
