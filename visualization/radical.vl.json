@@ -1,10 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 500,
+  "width": 300,
   "height": 350,
   "title": {
     "text": "Monthly Public Transport Usage",
-    "subtitle": "Total passengers per month (in millions)",
+    "subtitle": [
+      "Each segment represents a month,",
+      "Radius length indicates total passengers"
+    ],
     "fontSize": 18,
     "fontWeight": 600,
     "color": "#1e4d5c",
@@ -92,7 +95,7 @@
         "type": "linear",
         "zero": false,
         "domain": [30, 50],
-        "range": [80, 180]
+        "range": [80, 155]
       }
     },
     "color": {

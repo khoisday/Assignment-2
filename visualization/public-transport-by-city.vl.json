@@ -20,7 +20,15 @@
       "fold": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
       "as": ["Mode", "Value"]
     },
-    { "calculate": "replace(datum['City﻿'], '﻿', '')", "as": "City" }
+    { "calculate": "replace(datum['City﻿'], '﻿', '')", "as": "City" },
+    {
+      "calculate": "datum.Mode == 'Heavy rail' || datum.Mode == 'Light rail' ? 'Rail' : datum.Mode == 'UPT Bus' ? 'Buses' : datum.Mode",
+      "as": "Mode"
+    },
+    {
+      "aggregate": [{ "op": "sum", "field": "Value", "as": "TotalValue" }],
+      "groupby": ["City", "Mode"]
+    }
   ],
   "layer": [
     {
@@ -33,7 +41,7 @@
         "x": {
           "field": "City",
           "type": "nominal",
-          "sort": { "op": "sum", "field": "Value", "order": "descending" },
+          "sort": { "op": "sum", "field": "TotalValue", "order": "descending" },
           "axis": {
             "title": "City",
             "labelFontSize": 12,
@@ -44,8 +52,7 @@
           }
         },
         "y": {
-          "aggregate": "sum",
-          "field": "Value",
+          "field": "TotalValue",
           "type": "quantitative",
           "axis": {
             "title": "Million Passenger Trips",
@@ -62,15 +69,15 @@
           "type": "nominal",
           "title": "Transport Mode",
           "scale": {
-            "domain": ["Heavy rail", "Light rail", "UPT Bus", "Ferry"],
-            "range": ["#007b83", "#29a3a3", "#4caf50", "#fbc02d"]
+            "domain": ["Rail", "Buses", "Ferry"],
+            "range": ["#489fb5", "#9bc53d", "#fbc02d"]
           }
         },
         "tooltip": [
           { "field": "City", "type": "nominal", "title": "City" },
           { "field": "Mode", "type": "nominal", "title": "Transport Mode" },
           {
-            "field": "Value",
+            "field": "TotalValue",
             "type": "quantitative",
             "title": "Passengers (M)",
             "format": ".1f"
@@ -91,16 +98,16 @@
         "x": {
           "field": "City",
           "type": "nominal",
-          "sort": { "op": "sum", "field": "Value", "order": "descending" }
+          "sort": { "op": "sum", "field": "TotalValue", "order": "descending" }
         },
         "y": {
           "aggregate": "sum",
-          "field": "Value",
+          "field": "TotalValue",
           "type": "quantitative"
         },
         "text": {
           "aggregate": "sum",
-          "field": "Value",
+          "field": "TotalValue",
           "type": "quantitative",
           "format": ".0f"
         }

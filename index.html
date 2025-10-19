@@ -52,20 +52,22 @@
         </div>
       </div>
 
-      <div class="description-section">
-        <p>
-          Our transportation infrastructure serves 102.7 million passenger
-          journeys annually, representing a healthy 4.8% year-over-year growth
-          that reflects increasing public trust and utilization. The network
-          spans 32,929 kilometers of active rail infrastructure complemented by
-          877,000 kilometers of road coverage, providing comprehensive
-          connectivity across the region. System performance remains strong,
-          with passenger satisfaction consistently maintained between 80-90%,
-          indicating effective service delivery and operational reliability.
-          This integrated multi-modal approach continues to support regional
-          mobility needs while demonstrating capacity for sustained growth and
-          quality service standards.
-        </p>
+      <div class="map-description-textbox">
+        <div class="textbox-content">
+          <p>
+            Our transportation infrastructure serves 102.7 million passenger
+            journeys annually, representing a healthy 4.8% year-over-year growth
+            that reflects increasing public trust and utilization. The network
+            spans 32,929 kilometers of active rail infrastructure complemented
+            by 877,000 kilometers of road coverage, providing comprehensive
+            connectivity across the region. System performance remains strong,
+            with passenger satisfaction consistently maintained between 80-90%,
+            indicating effective service delivery and operational reliability.
+            This integrated multi-modal approach continues to support regional
+            mobility needs while demonstrating capacity for sustained growth and
+            quality service standards.
+          </p>
+        </div>
       </div>
 
       <div class="heatmap-section">
@@ -202,24 +204,26 @@
         <div class="inter-capital-textbox">
           <div class="textbox-content">
             <p>
-              Sydney and Melbourne dominate Australia's public transport
-              landscape, accounting for 75% of all passenger trips nationwide.
+              The Sydney-Canberra route dominates with 12 million passengers,
+              making it one of the world's busiest domestic routes. This
+              reflects Canberra's role as the national capital and the
+              concentration of government and business travel between the two
+              cities.
             </p>
             <p>
-              Sydney leads with 711 million annual trips, approximately 125
-              trips per resident. The city relies heavily on buses and heavy
-              rail for the majority of its journeys.
+              Sydney-Melbourne follows closely at 10 million passengers,
+              representing the critical link between Australia's two largest
+              metropolitan areas. This golden triangle of Sydney, Melbourne, and
+              Brisbane accounts for nearly 60% of all inter-capital passenger
+              movements.
             </p>
             <p>
-              Melbourne's iconic tram network is the world's largest, handling
-              significant passenger volumes and contributing to the city's 469
-              million trips.
-            </p>
-            <p>
-              Both major cities average around 120 trips per person annually,
-              significantly higher than other Australian cities, highlighting
-              the concentration of public transport investment and usage in the
-              two largest areas.
+              Routes connecting smaller capitals like Adelaide show
+              significantly lower volumes, highlighting the geographic and
+              economic centralization around the eastern seaboard. The disparity
+              underscores Australia's unique challenge of maintaining
+              connectivity across vast distances with concentrated population
+              centers.
             </p>
           </div>
         </div>
@@ -228,6 +232,108 @@
           <div id="inter-capital-chart"></div>
         </div>
       </div>
+
+      <footer class="metadata-section">
+        <h3>Data Sources & Metadata</h3>
+        <div class="metadata-content">
+          <div class="metadata-item">
+            <h4>
+              Australian Infrastructure and Transport Statistics Yearbook 2024
+            </h4>
+            <p>
+              <strong>Source:</strong> Bureau of Infrastructure and Transport
+              Research Economics (BITRE)
+            </p>
+            <p><strong>Time Period:</strong> 1975-2024 (Financial Years)</p>
+            <p>
+              <strong>Coverage:</strong> Public transport patronage by capital
+              city; Passenger travel by city pair
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a
+                href="https://www.bitre.gov.au/publications/2024/australian-infrastructure-and-transport-statistics-yearbook-2024/passengers#dl-data"
+                target="_blank"
+                >Passengers - Yearbook 2024
+              </a>
+            </p>
+          </div>
+
+          <div class="metadata-item">
+            <h4>Daily Public Transport Usage</h4>
+            <p><strong>Source:</strong> ACT Government Open Data Portal</p>
+            <p><strong>Time Period:</strong> 28 July - 31 August 2024</p>
+            <p>
+              <strong>Coverage:</strong> Australian public transport network
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a
+                href="https://www.data.act.gov.au/Transport/Daily-Public-Transport-Passenger-Journeys-by-Servi/nkxy-abdj/explore/query/SELECT%0A%20%20%60date%60%2C%0A%20%20%60local_route%60%2C%0A%20%20%60light_rail%60%2C%0A%20%20%60peak_service%60%2C%0A%20%20%60rapid_route%60%2C%0A%20%20%60school%60%2C%0A%20%20%60other%60%0AWHERE%0A%20%20%60date%60%0A%20%20%20%20BETWEEN%20%222024-07-28T00%3A00%3A00%22%20%3A%3A%20floating_timestamp%0A%20%20%20%20AND%20%222024-08-31T23%3A45%3A00%22%20%3A%3A%20floating_timestamp%0AORDER%20BY%20%60date%60%20DESC%20NULL%20LAST/page/filter"
+                target="_blank"
+                >Passengers - Yearbook 2024
+              </a>
+            </p>
+          </div>
+
+          <div class="metadata-item">
+            <h4>Monthly Transport Patronage</h4>
+            <p><strong>Source:</strong> Data VIC</p>
+            <p><strong>Time Period:</strong> January - December 2024</p>
+            <p>
+              <strong>Coverage:</strong> Australian public transport network
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a
+                href="https://discover.data.vic.gov.au/dataset/monthly-public-transport-patronage-by-mode"
+                target="_blank"
+                >Monthly public transport patronage by mode
+              </a>
+            </p>
+          </div>
+
+          <div class="metadata-item">
+            <h4>Private Transport Usage by Geography</h4>
+            <p>
+              <strong>Source:</strong> Australian Bureau of Statistics (ABS)
+            </p>
+            <p>
+              <strong>Dataset:</strong> Journey to Work - Method of Travel to
+              Work by SA2
+            </p>
+            <p>
+              <strong>Coverage:</strong> Australian method of transport usage
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a href="https://tablebuilder.abs.gov.au" target="_blank"
+                >Journey to Work - Method of Travel to Work by SA2
+              </a>
+            </p>
+          </div>
+
+          <div class="metadata-item">
+            <h4>Inter-Capital Travel</h4>
+            <p><strong>Source:</strong> BITRE Aviation Statistics</p>
+            <p>
+              <strong>Dataset:</strong> Domestic aviation route passenger
+              volumes
+            </p>
+            <p><strong>Time Period:</strong> 2023-24 Financial Year</p>
+            <p>
+              <strong>Coverage:</strong> Major city-pair routes across Australia
+            </p>
+          </div>
+        </div>
+
+        <div class="metadata-footer">
+          <p>
+            <strong>Dashboard Created:</strong> October 2025 |
+            <strong>Author:</strong> Phuoc Khoi Nguyen
+          </p>
+        </div>
+      </footer>
     </div>
 
     <script src="script/script.js"></script>

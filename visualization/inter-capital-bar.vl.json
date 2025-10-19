@@ -16,7 +16,7 @@
     "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/inter-capital-city-passenger.csv"
   },
   "transform": [
-    {"filter": "datum[''] == '2023-24'"},
+    { "filter": "datum[''] == '2023-24'" },
     {
       "fold": [
         "Syd-Mel",
@@ -33,13 +33,17 @@
       "as": "passengers"
     }
   ],
-  "mark": {"type": "bar", "cornerRadiusTopLeft": 4, "cornerRadiusTopRight": 4},
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 4,
+    "cornerRadiusTopRight": 4
+  },
   "encoding": {
     "y": {
       "field": "route",
       "type": "nominal",
       "title": "Route",
-      "sort": {"field": "passengers", "order": "descending"},
+      "sort": { "field": "passengers", "order": "descending" },
       "axis": {
         "labelFontSize": 12,
         "titleFontSize": 13,
@@ -62,13 +66,10 @@
       }
     },
     "color": {
-      "field": "passengers",
-      "type": "quantitative",
-      "scale": {"range": ["#a0dde6", "#0d7a8a"]},
-      "legend": null
+      "value": "#0D7A8A"
     },
     "tooltip": [
-      {"field": "route", "type": "nominal", "title": "Route"},
+      { "field": "route", "type": "nominal", "title": "Route" },
       {
         "field": "passengers",
         "type": "quantitative",
@@ -78,7 +79,7 @@
     ]
   },
   "config": {
-    "view": {"stroke": "transparent"},
-    "axis": {"domainColor": "#2c5f6f", "tickColor": "#2c5f6f"}
+    "view": { "stroke": "transparent" },
+    "axis": { "domainColor": "#2c5f6f", "tickColor": "#2c5f6f" }
   }
 }

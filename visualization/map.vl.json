@@ -51,7 +51,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#C0D2D3"
+        "fill": "#a8cfe1"
       }
     },
     {
@@ -99,9 +99,8 @@
           "field": "Percentage",
           "type": "quantitative",
           "scale": {
-            "scheme": "redyellowgreen",
+            "range": ["#e5f5f0", "#8dc9ba", "#3a9684", "#00686F"],
             "domain": [3, 56],
-            "reverse": true,
             "clamp": true
           },
           "legend": {
