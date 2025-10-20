@@ -1,0 +1,472 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 500,
+  "height": 400,
+  "padding": 20,
+  "title": {
+    "text": "Total visitor spend in Australia in 2024 by traveller type",
+    "subtitle": "(including long-stay international students)",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "anchor": "start",
+    "color": "#2c5f6f",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5a5a5a",
+    "offset": 10
+  },
+  "data": [
+    {
+      "name": "donut",
+      "values": [
+        {
+          "category": "Domestic",
+          "value": 141,
+          "percentage": 66,
+          "order": 0,
+          "startAngle": 2.143329567402382,
+          "endAngle": 6.283185307179586
+        },
+        {
+          "category": "International",
+          "value": 73,
+          "percentage": 34,
+          "order": 1,
+          "startAngle": 0,
+          "endAngle": 2.143329567402382
+        }
+      ],
+      "transform": [
+        {
+          "type": "pie",
+          "field": "value",
+          "startAngle": { "signal": "0" },
+          "endAngle": { "signal": "2*PI" },
+          "sort": { "field": "order" }
+        }
+      ]
+    },
+    {
+      "name": "international_bars",
+      "values": [
+        {
+          "type": "Holiday",
+          "value": 11,
+          "order": 1,
+          "label": "$11bn",
+          "total": 73,
+          "scaledValue": 42.1917808219178,
+          "y0": 0,
+          "y1": 42.1917808219178
+        },
+        {
+          "type": "Visiting friends",
+          "value": 5,
+          "order": 2,
+          "label": "$5bn",
+          "total": 73,
+          "scaledValue": 19.17808219178082,
+          "y0": 42.1917808219178,
+          "y1": 61.36986301369862
+        },
+        {
+          "type": "Business",
+          "value": 5,
+          "order": 3,
+          "label": "$5bn",
+          "total": 73,
+          "scaledValue": 7.671232876712328,
+          "y0": 61.36986301369862,
+          "y1": 69.04109589041094
+        },
+        {
+          "type": "Education",
+          "value": 52,
+          "order": 5,
+          "label": "$52bn",
+          "total": 73,
+          "scaledValue": 199.45205479452054,
+          "y0": 80.54794520547944,
+          "y1": 280
+        },
+        {
+          "type": "Other",
+          "value": 0.3,
+          "order": 6,
+          "label": "$0.3bn",
+          "total": 73,
+          "scaledValue": 1.1506849315068493,
+          "y0": 280,
+          "y1": 281.1506849315069
+        }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.value / datum.total * 280",
+          "as": "scaledValue"
+        },
+        {
+          "type": "stack",
+          "field": "scaledValue",
+          "sort": { "field": "order" }
+        }
+      ]
+    },
+    {
+      "name": "domestic_bars",
+      "values": [
+        {
+          "type": "Holiday",
+          "value": 75,
+          "order": 1,
+          "label": "$75bn",
+          "total": 141,
+          "scaledValue": 148.93617021276594,
+          "y0": 0,
+          "y1": 148.93617021276594
+        },
+        {
+          "type": "Visiting friends",
+          "value": 28,
+          "order": 2,
+          "label": "$28bn",
+          "total": 141,
+          "scaledValue": 55.60283687943263,
+          "y0": 148.93617021276594,
+          "y1": 204.53900709219857
+        },
+        {
+          "type": "Business",
+          "value": 29,
+          "order": 3,
+          "label": "$29bn",
+          "total": 141,
+          "scaledValue": 57.5886524822695,
+          "y0": 204.53900709219857,
+          "y1": 262.12765957446805
+        },
+        {
+          "type": "Other",
+          "value": 9,
+          "order": 4,
+          "label": "$9bn",
+          "total": 141,
+          "scaledValue": 17.872340425531913,
+          "y0": 262.12765957446805,
+          "y1": 279.99999999999994
+        }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.value / datum.total * 280",
+          "as": "scaledValue"
+        },
+        {
+          "type": "stack",
+          "field": "scaledValue",
+          "sort": { "field": "order" }
+        }
+      ]
+    },
+    {
+      "name": "legend_data",
+      "values": [
+        { "type": "Holiday", "order": 1, "row": 0, "col": 0 },
+        { "type": "Visiting friends", "order": 2, "row": 0, "col": 1 },
+        { "type": "Business", "order": 3, "row": 0, "col": 2 },
+        { "type": "Education", "order": 4, "row": 1, "col": 0 },
+        { "type": "Other", "order": 5, "row": 1, "col": 1 }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "floor((datum.order - 1) / 3)",
+          "as": "row"
+        },
+        { "type": "formula", "expr": "(datum.order - 1) % 3", "as": "col" }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Holiday",
+        "Visiting friends",
+        "Business",
+        "Education",
+        "Other"
+      ],
+      "range": ["#0d5661", "#d49b8f", "#b7806f", "#a8c4c8", "#e8d4d0"]
+    },
+    {
+      "name": "donut_color",
+      "type": "ordinal",
+      "domain": ["Domestic", "International"],
+      "range": ["#0d5661", "#c5908e"]
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": { "value": 10 },
+          "y": { "value": 50 },
+          "width": { "value": 90 },
+          "height": { "value": 280 }
+        }
+      },
+      "marks": [
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 45 },
+              "y": { "value": -30 },
+              "text": { "value": "Domestic" },
+              "align": { "value": "center" },
+              "fontSize": { "value": 12 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "#2c5f6f" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 45 },
+              "y": { "value": -10 },
+              "text": { "value": "$141 billion" },
+              "align": { "value": "center" },
+              "fontSize": { "value": 14 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "#000" }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "from": { "data": "domestic_bars" },
+          "encode": {
+            "enter": {
+              "x": { "value": 10 },
+              "width": { "value": 70 },
+              "y": { "field": "y0" },
+              "y2": { "field": "y1" },
+              "fill": { "scale": "color", "field": "type" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": { "data": "domestic_bars" },
+          "encode": {
+            "enter": {
+              "x": { "value": 45 },
+              "y": { "signal": "(datum.y0 + datum.y1) / 2" },
+              "text": { "field": "label" },
+              "align": { "value": "center" },
+              "baseline": { "value": "middle" },
+              "fill": { "signal": "datum.type == 'Other' ? '#000' : 'white'" },
+              "fontSize": { "value": 10 },
+              "fontWeight": { "value": "bold" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": { "value": 150 },
+          "y": { "value": 70 },
+          "width": { "value": 200 },
+          "height": { "value": 200 }
+        }
+      },
+      "marks": [
+        {
+          "type": "arc",
+          "from": { "data": "donut" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "100" },
+              "y": { "signal": "100" },
+              "startAngle": { "field": "startAngle" },
+              "endAngle": { "field": "endAngle" },
+              "innerRadius": { "value": 55 },
+              "outerRadius": { "value": 95 },
+              "fill": { "scale": "donut_color", "field": "category" },
+              "stroke": { "value": "white" },
+              "strokeWidth": { "value": 3 }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": { "data": "donut" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "datum.category == 'Domestic' ? 30: 170" },
+              "y": { "signal": "datum.category == 'Domestic' ? 120 : 70" },
+              "text": { "signal": "datum.percentage + '%'" },
+              "align": { "value": "center" },
+              "baseline": { "value": "middle" },
+              "fontSize": { "value": 16 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "white" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 100 },
+              "y": { "value": 93 },
+              "text": { "value": "Total spend" },
+              "align": { "value": "center" },
+              "baseline": { "value": "bottom" },
+              "fontSize": { "value": 11 },
+              "fill": { "value": "#5a5a5a" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 100 },
+              "y": { "value": 107 },
+              "text": { "value": "$214 billion" },
+              "align": { "value": "center" },
+              "baseline": { "value": "top" },
+              "fontSize": { "value": 18 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "#000" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": { "value": 400 },
+          "y": { "value": 50 },
+          "width": { "value": 90 },
+          "height": { "value": 280 }
+        }
+      },
+      "marks": [
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 45 },
+              "y": { "value": -30 },
+              "text": { "value": "International" },
+              "align": { "value": "center" },
+              "fontSize": { "value": 12 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "#2c5f6f" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": { "value": 45 },
+              "y": { "value": -10 },
+              "text": { "value": "$73 billion" },
+              "align": { "value": "center" },
+              "fontSize": { "value": 14 },
+              "fontWeight": { "value": "bold" },
+              "fill": { "value": "#000" }
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "from": { "data": "international_bars" },
+          "encode": {
+            "enter": {
+              "x": { "value": 10 },
+              "width": { "value": 70 },
+              "y": { "field": "y0" },
+              "y2": { "field": "y1" },
+              "fill": { "scale": "color", "field": "type" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": { "data": "international_bars" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "datum.value > 2 ? 45 : -5" },
+              "y": { "signal": "(datum.y0 + datum.y1) / 2" },
+              "text": { "field": "label" },
+              "align": { "signal": "datum.value > 2 ? 'center' : 'right'" },
+              "baseline": { "value": "middle" },
+              "fill": {
+                "signal": "datum.value > 2 ? (datum.type == 'Education' || datum.type == 'Work' || datum.type == 'Other' ? '#000' : 'white') : '#000'"
+              },
+              "fontSize": { "value": 10 },
+              "fontWeight": { "value": "bold" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "update": {
+          "x": { "value": 50 },
+          "y": { "value": 360 },
+          "width": { "value": 400 },
+          "height": { "value": 60 }
+        }
+      },
+      "marks": [
+        {
+          "type": "symbol",
+          "from": { "data": "legend_data" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "datum.col * 130" },
+              "y": { "signal": "datum.row * 20" },
+              "size": { "value": 120 },
+              "shape": { "value": "square" },
+              "fill": { "scale": "color", "field": "type" }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "from": { "data": "legend_data" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "datum.col * 130 + 12" },
+              "y": { "signal": "datum.row * 20" },
+              "text": { "field": "type" },
+              "align": { "value": "left" },
+              "baseline": { "value": "middle" },
+              "fontSize": { "value": 12 },
+              "fill": { "value": "#2c5f6f" }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}

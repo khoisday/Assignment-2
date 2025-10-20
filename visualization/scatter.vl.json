@@ -1,0 +1,116 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "International Visitor Analysis",
+    "subtitle": "Trips vs spending efficiency (June Quarter 2025)",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "fontWeight": "bold",
+    "subtitleFontWeight": "normal",
+    "anchor": "start",
+    "color": "#2c5f6f",
+    "subtitleColor": "#5a5a5a",
+    "offset": 10,
+    "subtitlePadding": 5
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/khoisday/Assignment-2/refs/heads/main/data/International-Visitor-Survey-Results-June-Quarter-2025.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    {
+      "calculate": "datum[''] ? datum[''] : datum['Country']",
+      "as": "Country"
+    },
+    {
+      "calculate": "toNumber(replace(datum['Trips (\\'000)'], ',', ''))",
+      "as": "Trips"
+    },
+    {
+      "calculate": "toNumber(replace(datum['Nights (\\'000)'], ',', ''))",
+      "as": "Nights"
+    },
+    {
+      "calculate": "toNumber(replace(datum['Total trip spend ($M)'], ',', ''))",
+      "as": "TotalSpend"
+    },
+    {
+      "calculate": "(datum.TotalSpend * 1000) / datum.Nights",
+      "as": "SpendPerNight"
+    },
+    { "calculate": "datum.Nights / datum.Trips", "as": "AvgStayLength" }
+  ],
+  "width": 1100,
+  "height": 400,
+  "mark": {
+    "type": "circle",
+    "opacity": 0.75,
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "Trips",
+      "type": "quantitative",
+      "title": "Number of Trips ('000)",
+      "scale": { "type": "log", "domain": [1, 1000] },
+      "axis": { "grid": true, "gridOpacity": 0.3 }
+    },
+    "y": {
+      "field": "SpendPerNight",
+      "type": "quantitative",
+      "title": "Spend per Night ($)",
+      "axis": { "grid": true, "gridOpacity": 0.3 }
+    },
+    "size": {
+      "field": "TotalSpend",
+      "type": "quantitative",
+      "title": "Total Spend ($M)",
+      "scale": { "range": [100, 2000] }
+    },
+    "color": {
+      "field": "AvgStayLength",
+      "type": "quantitative",
+      "title": "Avg Stay (nights)",
+      "scale": { "scheme": "teals" }
+    },
+    "tooltip": [
+      { "field": "Country", "type": "nominal", "title": "Country" },
+      {
+        "field": "Trips",
+        "type": "quantitative",
+        "title": "Trips ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "Nights",
+        "type": "quantitative",
+        "title": "Nights ('000)",
+        "format": ",.0f"
+      },
+      {
+        "field": "AvgStayLength",
+        "type": "quantitative",
+        "title": "Avg Stay Length",
+        "format": ".1f"
+      },
+      {
+        "field": "TotalSpend",
+        "type": "quantitative",
+        "title": "Total Spend ($M)",
+        "format": ",.0f"
+      },
+      {
+        "field": "SpendPerNight",
+        "type": "quantitative",
+        "title": "Spend per Night ($)",
+        "format": ",.2f"
+      }
+    ]
+  },
+  "config": {
+    "view": { "stroke": "transparent" },
+    "axis": { "labelFontSize": 11, "titleFontSize": 12 },
+    "legend": { "labelFontSize": 11, "titleFontSize": 12 }
+  }
+}

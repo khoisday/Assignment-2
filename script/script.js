@@ -71,6 +71,23 @@ function loadVisualizations() {
     "#heatmap-chart",
     "vega-lite"
   );
+
+  // Load scatter plot (scatter.vl.json)
+  loadVisualization(
+    "visualization/scatter.vl.json",
+    "#scatter-chart",
+    "vega-lite"
+  );
+
+  // Load two-sided comparison chart (two_side.vl.json)
+  loadVisualization(
+    "visualization/two_side.vl.json",
+    "#two-side-chart",
+    "vega-lite"
+  );
+
+  // Load mixed chart (mix_chart.vg.json) - vega spec
+  loadVisualization("visualization/mix_chart.vg.json", "#mix-chart", "vega");
 }
 
 // Generic function to load a visualization

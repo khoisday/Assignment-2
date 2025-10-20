@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Spend on domestic overnight holiday trips by category",
+    "subtitle": "Change (%) in 2024 on 2023",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "anchor": "start",
+    "color": "#2c5f6f",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#5a5a5a"
+  },
+  "width": 600,
+  "height": 400,
+  "data": {
+    "values": [
+      { "category": "Groceries", "change": 7, "order": 1 },
+      { "category": "Takeaway & restaurants", "change": 6, "order": 2 },
+      { "category": "Entertainment", "change": 5, "order": 3 },
+      { "category": "Airfares", "change": 0, "order": 4 },
+      { "category": "Accommodation", "change": -1, "order": 5 },
+      { "category": "Transportation", "change": -2, "order": 6 },
+      { "category": "Shopping", "change": -4, "order": 7 },
+      { "category": "Alcohol, drinks", "change": -6, "order": 8 },
+      { "category": "Total*", "change": -1, "order": 9 }
+    ]
+  },
+  "mark": { "type": "bar", "height": { "band": 0.6 } },
+  "encoding": {
+    "y": {
+      "field": "category",
+      "type": "nominal",
+      "axis": { "title": null, "labelFontSize": 11 },
+      "sort": { "field": "order" }
+    },
+    "x": {
+      "field": "change",
+      "type": "quantitative",
+      "axis": {
+        "title": "Change (%)",
+        "titleFontSize": 12,
+        "labelFontSize": 11,
+        "grid": true,
+        "gridOpacity": 0.3
+      },
+      "scale": { "domain": [-8, 8] }
+    },
+    "color": {
+      "condition": { "test": "datum.change >= 0", "value": "#0d5661" },
+      "value": "#c5908e"
+    },
+    "tooltip": [
+      { "field": "category", "type": "nominal", "title": "Category" },
+      {
+        "field": "change",
+        "type": "quantitative",
+        "title": "Change (%)",
+        "format": "+.0f"
+      }
+    ]
+  },
+  "layer": [
+    { "mark": { "type": "bar" } },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "align": "left"
+      },
+      "encoding": {
+        "text": { "field": "change", "type": "quantitative", "format": "+.0f" },
+        "color": { "value": "#2c5f6f" },
+        "x": { "field": "change", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "rule", "strokeWidth": 2, "color": "#000" },
+      "encoding": { "x": { "datum": 0 } }
+    }
+  ],
+  "config": {
+    "view": { "stroke": "transparent" },
+    "axis": { "labelColor": "#2c5f6f", "titleColor": "#2c5f6f" }
+  }
+}
