@@ -6,7 +6,7 @@
     "text": "Monthly Public Transport Usage",
     "subtitle": [
       "Each segment represents a month,",
-      "Radius length indicates total passengers"
+      "Radius length indicates total passengers (in millions)"
     ],
     "fontSize": 18,
     "fontWeight": 600,
